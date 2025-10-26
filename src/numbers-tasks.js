@@ -228,8 +228,8 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-  const res = parseInt(String(value));
-  return isNaN(res) ? def : res;
+  const res = Number.parseInt(String(value), 10);
+  return Number.isNaN(res) ? def : res;
 }
 
 /**
@@ -265,8 +265,8 @@ function getFibonacciNumber(index) {
   let a = 0;
   let b = 1;
 
-  for (let c = 0; c < index; c++) {
-    let tempA = a;
+  for (let c = 0; c < index; c += 1) {
+    const tempA = a;
     a = b;
     b = tempA + b;
   }
@@ -301,7 +301,7 @@ function getSumToN(n) {
  */
 function getSumOfDigits(num) {
   const a = num.toString().split('').map(Number);
-  const sum = a.reduce((acc, num) => acc + num, 0);
+  const sum = a.reduce((acc, digit) => acc + digit, 0);
 
   return sum;
 }
@@ -318,7 +318,8 @@ function getSumOfDigits(num) {
  *   15  => false
  */
 function isPowerOfTwo(num) {
-  return num > 0 && (num & (num - 1)) === 0;
+  if (num <= 0) return false;
+  return Number.isInteger(Math.log2(num));
 }
 
 /**
@@ -425,7 +426,7 @@ function getNumberValue(number) {
  * '5'      => false
  */
 function isNumber(number) {
-  return Number.isFinite(number) ? true : false;
+  return Number.isFinite(number);
 }
 
 /**
@@ -473,7 +474,7 @@ function getFloatOnString(str) {
  */
 function getIntegerOnString(str, base) {
   const num = Number.parseInt(str, base);
-  if (isNaN(num)) return NaN;
+  if (Number.isNaN(num)) return NaN;
   return Math.trunc(num);
 }
 
@@ -563,8 +564,8 @@ function getIntegerPartNumber(number) {
  * 0.1, 0.2, 0.3 => 0.6
  */
 function getSumOfNumbers(x1, x2, x3) {
-  let sum = x1 + x2 + x3;
-  let b = sum.toFixed(1);
+  const sum = x1 + x2 + x3;
+  const b = sum.toFixed(1);
   return b;
 }
 
@@ -597,10 +598,8 @@ function getMaxNumber(firstNumber, secondNumber) {
  * -1, 1 => -1 | 0 | 1
  */
 function getRandomInteger(min, max) {
-  let a = Math.random(min, max);
-  return Math.round(min, max);
+  return Math.round(Math.random() * (max - min) + min);
 }
-
 /**
  * Returns the length of the hypotenuse of a right triangle.
  *
