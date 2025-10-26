@@ -227,8 +227,9 @@ function isPrime(n) {
  *   toNumber(42, 0) => 42
  *   toNumber(new Number(42), 0) => 42
  */
-function toNumber(/* value, def */) {
-  throw new Error('Not implemented');
+function toNumber(value, def) {
+  const res = parseInt(String(value));
+  return isNaN(res) ? def : res;
 }
 
 /**
@@ -242,9 +243,11 @@ function toNumber(/* value, def */) {
  *   -2 => -8
  *   0  => 0
  */
-function getCube(/* num */) {
-  throw new Error('Not implemented');
+function getCube(num) {
+  let a = Math.pow(num, 3);
+  return a;
 }
+console.log(getCube(-2));
 
 /**
  * Returns the Fibonacci number located at the index position.
@@ -259,8 +262,19 @@ function getCube(/* num */) {
  *   3  => 2
  *   10 => 55
  */
-function getFibonacciNumber(/* index */) {
-  throw new Error('Not implemented');
+// 0, 1, 1, 2, 3, 5, 8, 13, 21
+function getFibonacciNumber(index) {
+  let a = 0;
+  let b = 1;
+
+  for (let c = 0; c < index; c++) {
+    let tempA = a;
+    a = b;
+    b = tempA + b;
+  }
+  return a;
+  // if (index < 2) return index;
+  // return getFibonacciNumber(index - 2) + getFibonacciNumber(index - 1);
 }
 
 /**
@@ -274,8 +288,8 @@ function getFibonacciNumber(/* index */) {
  *   10 => 55 // (1+2+3+...+10)
  *   1  => 1
  */
-function getSumToN(/* n */) {
-  throw new Error('Not implemented');
+function getSumToN(n) {
+  return (n * (n + 1)) / 2;
 }
 
 /**
@@ -288,9 +302,13 @@ function getSumToN(/* n */) {
  *   123 => 6  // (1+2+3)
  *   202 => 4  // (2+0+2)
  *   5   => 5  // 5
+ * split,reduce
  */
-function getSumOfDigits(/* num */) {
-  throw new Error('Not implemented');
+function getSumOfDigits(num) {
+  const a = num.toString().split('').map(Number);
+  const sum = a.reduce((acc, num) => acc + num, 0);
+
+  return sum;
 }
 
 /**
@@ -304,8 +322,9 @@ function getSumOfDigits(/* num */) {
  *   16  => true
  *   15  => false
  */
-function isPowerOfTwo(/* num */) {
-  throw new Error('Not implemented');
+function isPowerOfTwo(num) {
+  let a = Math.sqrt(num);
+  return Number.isInteger(a) ? true : false;
 }
 
 /**
@@ -318,13 +337,13 @@ function isPowerOfTwo(/* num */) {
  *   0 => 0
  *   Math.PI / 2 => 1
  */
-function getSine(/* num */) {
-  throw new Error('Not implemented');
+function getSine(num) {
+  return Math.sin(num);
 }
 
 /**
  * Returns a string representation of a number in a specified base (radix).
- *
+ *parseint
  * @param {number} number
  * @param {number} base
  * @return {string}
@@ -333,8 +352,8 @@ function getSine(/* num */) {
  * 255, 16 => 'ff'
  * 2, 2    => '10'
  */
-function numberToStringInBase(/* number, base */) {
-  throw new Error('Not implemented');
+function numberToStringInBase(number, base) {
+  return number.toString(base);
 }
 
 /**
@@ -347,8 +366,8 @@ function numberToStringInBase(/* number, base */) {
  * @example:
  * 12345, 2    => '1.23e+4'
  */
-function toExponential(/* number, fractionDigits */) {
-  throw new Error('Not implemented');
+function toExponential(number, fractionDigits) {
+  return number.toExponential(fractionDigits);
 }
 
 /**
@@ -362,8 +381,8 @@ function toExponential(/* number, fractionDigits */) {
  * 12345, 2    => '12345.00'
  * 12.345, 1   => '12.3'
  */
-function toFixed(/* number, fractionDigits */) {
-  throw new Error('Not implemented');
+function toFixed(number, fractionDigits) {
+  return number.toFixed(fractionDigits);
 }
 
 /**
