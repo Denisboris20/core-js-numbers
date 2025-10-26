@@ -50,7 +50,7 @@ function getCircleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
-  return (value1 + value2) / 2;
+  return value1 / 2 + value2 / 2;
 }
 
 /**
@@ -244,10 +244,8 @@ function toNumber(value, def) {
  *   0  => 0
  */
 function getCube(num) {
-  let a = Math.pow(num, 3);
-  return a;
+  return num ** 3;
 }
-console.log(getCube(-2));
 
 /**
  * Returns the Fibonacci number located at the index position.
@@ -273,8 +271,6 @@ function getFibonacciNumber(index) {
     b = tempA + b;
   }
   return a;
-  // if (index < 2) return index;
-  // return getFibonacciNumber(index - 2) + getFibonacciNumber(index - 1);
 }
 
 /**
@@ -302,7 +298,6 @@ function getSumToN(n) {
  *   123 => 6  // (1+2+3)
  *   202 => 4  // (2+0+2)
  *   5   => 5  // 5
- * split,reduce
  */
 function getSumOfDigits(num) {
   const a = num.toString().split('').map(Number);
@@ -323,8 +318,7 @@ function getSumOfDigits(num) {
  *   15  => false
  */
 function isPowerOfTwo(num) {
-  let a = Math.sqrt(num);
-  return Number.isInteger(a) ? true : false;
+  return num > 0 && (num & (num - 1)) === 0;
 }
 
 /**
@@ -478,9 +472,9 @@ function getFloatOnString(str) {
  * '10', 8              => 8
  */
 function getIntegerOnString(str, base) {
-  let a = str.toString(base);
-  let b = Number.parseFloat(a);
-  return Math.trunc(b);
+  const num = Number.parseInt(str, base);
+  if (isNaN(num)) return NaN;
+  return Math.trunc(num);
 }
 
 /**
@@ -618,7 +612,7 @@ function getRandomInteger(min, max) {
  * 3, 4 => 5
  */
 function getHypotenuse(a, b) {
-  return Math.sqrt(a ** 2 + b ** 2);
+  return Math.hypot(a, b);
 }
 
 /**
@@ -635,7 +629,7 @@ function getHypotenuse(a, b) {
  * 15 => 8
  */
 function getCountOfOddNumbers(number) {
-  return Math.ceil(number / 2);
+  return Math.ceil(Math.abs(number) / 2);
 }
 
 module.exports = {
